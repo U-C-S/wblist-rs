@@ -2,14 +2,21 @@ pub mod browser;
 mod list;
 
 use browser::Browser;
-use std::fs;
 
 pub fn get_browser_list() -> Vec<Browser<'static>> {
     let full_list = list::BROWSER_LIST;
     let mut available_browsers: Vec<Browser> = Vec::new();
 
     for i in full_list {
-        let path = i.path;
+        let browser_path = i.path;
+
+        use std::path::Path;
+        if Path::new(browser_path).exists() {
+            available_browsers.push(i);
+        }
+
+        /*
+        use std::fs;
         let md = fs::metadata(path);
         match md {
             Ok(_) => {
@@ -19,6 +26,7 @@ pub fn get_browser_list() -> Vec<Browser<'static>> {
                 println!("- {} is not available", i.full_name);
             }
         }
+        */
     }
 
     available_browsers

@@ -6,7 +6,6 @@ version = "0.1.0"
 description = "A Rust library to get the list of browsers installed in Windows OS"
 repository = "https://github.com/U-C-S/wblist-rs"
 license = "MIT"
-license-file = "LICENSE"
 edition = "2021"
 
 [dependencies]
