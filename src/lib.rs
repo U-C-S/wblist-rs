@@ -1,59 +1,68 @@
 pub mod browser;
-mod list;
+pub mod list;
 
-use browser::Browser;
+pub mod get_browser_list {
+    use crate::browser::Browser;
+    use crate::list::BROWSER_LIST;
 
-pub fn get_browser_list() -> Vec<Browser<'static>> {
-    let full_list = list::BROWSER_LIST;
-    let mut available_browsers: Vec<Browser> = Vec::new();
+    pub fn from_fs_search() -> Vec<Browser<'static>> {
+        let mut available_browsers: Vec<Browser> = Vec::new();
 
-    for i in full_list {
-        let browser_path = i.path;
+        for i in BROWSER_LIST {
+            let browser_path = i.path;
 
-        use std::path::Path;
-        if Path::new(browser_path).exists() {
-            available_browsers.push(i);
-        }
-
-        /*
-        use std::fs;
-        let md = fs::metadata(path);
-        match md {
-            Ok(_) => {
+            use std::path::Path;
+            if Path::new(browser_path).exists() {
                 available_browsers.push(i);
             }
-            Err(_) => {
-                println!("- {} is not available", i.full_name);
+
+            /*
+            use std::fs;
+            let md = fs::metadata(path);
+            match md {
+                Ok(_) => {
+                    available_browsers.push(i);
+                }
+                Err(_) => {
+                    println!("- {} is not available", i.full_name);
+                }
             }
+            */
         }
-        */
+
+        available_browsers
     }
 
-    available_browsers
-}
+    pub fn from_reg() -> Vec<Browser<'static>> {
+        use registry::Hive::LocalMachine;
+        use registry::Security;
 
-pub fn get_browser_list_from_reg() {
-    use registry::Hive::LocalMachine;
-    use registry::Security;
+        let mut list: Vec<Browser<'static>> = Vec::new();
+        let key = LocalMachine
+            .open("SOFTWARE\\Clients\\StartMenuInternet", Security::Read)
+            .unwrap();
 
-    let mut list: Vec<Browser> = Vec::new();
-    let key = LocalMachine
-        .open("SOFTWARE\\Clients\\StartMenuInternet", Security::Read)
-        .unwrap();
+        let names = key.keys();
+        for name in names {
+            let keyname = name.unwrap();
 
-    let names = key.keys();
-    for name in names {
-        let keyname = name.unwrap();
-        let lol = keyname.open(Security::Read).unwrap();
-        let val = lol.value("");
+            let browserkey = keyname.open(Security::Read).unwrap();
+            let name = browserkey.value("");
 
-        match val {
-            Ok(x) => {
-                println!("{}", x.to_string());
-            }
-            Err(_) => {
-                println!("- Not a browser");
-            }
+            let pathkey = browserkey.open("shell\\open\\command", Security::Read);
+            match pathkey {
+                Ok(path) => {
+                    let path = path.value("");
+                    list.push(Browser {
+                        full_name: &name.unwrap().to_string(),
+                        short_name: "",
+                        path: &path.unwrap().to_string(),
+                    });
+                }
+                Err(_) => {}
+            };
         }
+
+        list
     }
 }
