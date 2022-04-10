@@ -1,4 +1,6 @@
-#[derive(Debug, Clone, Copy)]
+use serde::Deserialize;
+
+#[derive(Deserialize, Debug, Clone, Copy)]
 pub struct Browser<T>
 where
     T: AsRef<str> + ToString,
