@@ -47,20 +47,16 @@ pub mod get_browser_list {
             let keyname = name.unwrap();
 
             let browserkey = keyname.open(Security::Read).unwrap();
-            let name = browserkey
-                .value("")
-                .unwrap_or_else(|_| registry::Data::None);
+            let name = browserkey.value("").unwrap_or(registry::Data::None);
             // println!("{}", &name);
 
             let pathkey = browserkey.open("shell\\open\\command", Security::Read);
-            match pathkey {
-                Ok(path) => {
-                    let path = path.value("").unwrap();
-                    let b = Browser::new(name.to_string(), "".to_string(), path.to_string());
-                    list.push(b);
-                }
-                Err(_) => {}
-            };
+
+            if let Ok(path) = pathkey {
+                let path = path.value("").unwrap();
+                let b = Browser::new(name.to_string(), "".to_string(), path.to_string());
+                list.push(b);
+            }
         }
 
         list
