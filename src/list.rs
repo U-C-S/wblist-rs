@@ -1,6 +1,6 @@
 use crate::browser::Browser;
 
-pub const BROWSER_LIST: [Browser; 5] = [
+pub static BROWSER_LIST: [Browser<&str>; 5] = [
     Browser {
         full_name: "Google Chrome",
         short_name: "Chrome",

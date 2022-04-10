@@ -5,15 +5,15 @@ pub mod get_browser_list {
     use crate::browser::Browser;
     use crate::list::BROWSER_LIST;
 
-    pub fn from_fs_search() -> Vec<Browser<'static>> {
-        let mut available_browsers: Vec<Browser> = Vec::new();
+    pub fn from_fs_search() -> Vec<Browser<&'static str>> {
+        let mut available_browsers: Vec<Browser<&'static str>> = Vec::new();
 
-        for i in BROWSER_LIST {
+        for i in &BROWSER_LIST {
             let browser_path = i.path;
 
             use std::path::Path;
-            if Path::new(browser_path).exists() {
-                available_browsers.push(i);
+            if Path::new(&browser_path).exists() {
+                available_browsers.push(*i);
             }
 
             /*
@@ -33,11 +33,11 @@ pub mod get_browser_list {
         available_browsers
     }
 
-    pub fn from_reg() -> Vec<Browser<'static>> {
+    pub fn from_reg() -> Vec<Browser<String>> {
         use registry::Hive::LocalMachine;
         use registry::Security;
 
-        let mut list: Vec<Browser<'static>> = Vec::new();
+        let mut list: Vec<Browser<String>> = Vec::new();
         let key = LocalMachine
             .open("SOFTWARE\\Clients\\StartMenuInternet", Security::Read)
             .unwrap();
@@ -47,17 +47,17 @@ pub mod get_browser_list {
             let keyname = name.unwrap();
 
             let browserkey = keyname.open(Security::Read).unwrap();
-            let name = browserkey.value("");
+            let name = browserkey
+                .value("")
+                .unwrap_or_else(|_| registry::Data::None);
+            // println!("{}", &name);
 
             let pathkey = browserkey.open("shell\\open\\command", Security::Read);
             match pathkey {
                 Ok(path) => {
-                    let path = path.value("");
-                    list.push(Browser {
-                        full_name: &name.unwrap().to_string(),
-                        short_name: "",
-                        path: &path.unwrap().to_string(),
-                    });
+                    let path = path.value("").unwrap();
+                    let b = Browser::new(name.to_string(), "".to_string(), path.to_string());
+                    list.push(b);
                 }
                 Err(_) => {}
             };

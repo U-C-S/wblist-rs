@@ -1,12 +1,18 @@
-#[derive(Debug)]
-pub struct Browser<'a> {
-    pub full_name: &'a str,
-    pub short_name: &'a str,
-    pub path: &'a str,
+#[derive(Debug, Clone, Copy)]
+pub struct Browser<T>
+where
+    T: AsRef<str> + ToString,
+{
+    pub full_name: T,
+    pub short_name: T,
+    pub path: T,
 }
 
-impl<'a> Browser<'a> {
-    pub fn new(full_name: &'a str, short_name: &'a str, path: &'a str) -> Self {
+impl<T> Browser<T>
+where
+    T: AsRef<str> + ToString,
+{
+    pub fn new(full_name: T, short_name: T, path: T) -> Self {
         Self {
             full_name,
             short_name,

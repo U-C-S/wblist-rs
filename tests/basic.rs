@@ -14,5 +14,8 @@ fn list_the_browsers() {
 
 #[test]
 fn list_the_browsers_from_reg() {
-    assert_eq!(from_reg().len(), 3usize);
+    let x = from_reg();
+    for i in &x {
+        // println!("{:?}", i);
+    }
 }
