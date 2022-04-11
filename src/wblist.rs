@@ -1,15 +1,16 @@
 use crate::browser::Browser;
-use crate::list::BROWSER_LIST;
+use crate::browser_list::list_of_browsers;
 
-pub fn from_fs_search() -> Vec<Browser<&'static str>> {
-    let mut available_browsers: Vec<Browser<&'static str>> = Vec::new();
+pub fn from_fs_search() -> Vec<Browser<String>> {
+    let mut available_browsers: Vec<Browser<String>> = Vec::new();
+    let browser_list = list_of_browsers();
 
-    for i in &BROWSER_LIST {
-        let browser_path = i.path;
+    for i in browser_list {
+        let browser_path = &i.path;
 
         use std::path::Path;
         if Path::new(&browser_path).exists() {
-            available_browsers.push(*i);
+            available_browsers.push(i);
         }
 
         /*

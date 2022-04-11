@@ -4,7 +4,7 @@ pub mod list;
 mod wblist;
 mod browser_list;
 
-pub fn from_fs_search() -> Vec<browser::Browser<&'static str>> {
+pub fn from_fs_search() -> Vec<browser::Browser<String>> {
     wblist::from_fs_search()
 }
 
