@@ -1,20 +1,14 @@
 use serde::Deserialize;
 
-#[derive(Deserialize, Debug, Clone, Copy)]
-pub struct Browser<T>
-where
-    T: AsRef<str> + ToString,
-{
-    pub full_name: T,
-    pub short_name: T,
-    pub path: T,
+#[derive(Deserialize, Debug)]
+pub struct Browser {
+    pub full_name: String,
+    pub short_name: String,
+    pub path: String,
 }
 
-impl<T> Browser<T>
-where
-    T: AsRef<str> + ToString,
-{
-    pub fn new(full_name: T, short_name: T, path: T) -> Self {
+impl Browser {
+    pub fn new(full_name: String, short_name: String, path: String) -> Self {
         Self {
             full_name,
             short_name,

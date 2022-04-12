@@ -1,8 +1,8 @@
 use crate::browser::Browser;
 use crate::browser_list::list_of_browsers;
 
-pub fn from_fs_search() -> Vec<Browser<String>> {
-    let mut available_browsers: Vec<Browser<String>> = Vec::new();
+pub fn from_fs_search() -> Vec<Browser> {
+    let mut available_browsers: Vec<Browser> = Vec::new();
     let browser_list = list_of_browsers();
 
     for i in browser_list {
@@ -30,11 +30,11 @@ pub fn from_fs_search() -> Vec<Browser<String>> {
     available_browsers
 }
 
-pub fn from_reg() -> Vec<Browser<String>> {
+pub fn from_reg() -> Vec<Browser> {
     use registry::Hive::LocalMachine;
     use registry::Security;
 
-    let mut list: Vec<Browser<String>> = Vec::new();
+    let mut list: Vec<Browser> = Vec::new();
     let key = LocalMachine
         .open("SOFTWARE\\Clients\\StartMenuInternet", Security::Read)
         .unwrap();

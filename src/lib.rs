@@ -1,13 +1,12 @@
 pub mod browser;
-pub mod list;
+pub mod browser_list;
 
 mod wblist;
-mod browser_list;
 
-pub fn from_fs_search() -> Vec<browser::Browser<String>> {
+pub fn from_fs_search() -> Vec<browser::Browser> {
     wblist::from_fs_search()
 }
 
-pub fn from_reg() -> Vec<browser::Browser<String>> {
+pub fn from_reg() -> Vec<browser::Browser> {
     wblist::from_reg()
 }

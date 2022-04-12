@@ -1,10 +1,10 @@
-use wblist::list::BROWSER_LIST;
+// use wblist::list::BROWSER_LIST;
 use wblist::{from_fs_search, from_reg};
 
-#[test]
-fn it_works() {
-    assert_eq!(BROWSER_LIST[0].short_name, "Chrome");
-}
+// #[test]
+// fn it_works() {
+//     assert_eq!(BROWSER_LIST[0].short_name, "Chrome");
+// }
 
 #[test]
 fn list_the_browsers() {

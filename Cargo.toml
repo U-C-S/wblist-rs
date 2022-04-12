@@ -11,4 +11,4 @@ edition = "2021"
 [dependencies]
 serde = { version = "^1.0", features = ["derive"] }
 serde_json = { version = "^1.0" }
-registry = { git = "https://github.com/bbqsrc/registry-rs", rev = "refs/pull/5/head" }
+registry = { git = "https://github.com/bbqsrc/registry-rs", rev = "refs/pull/5/head", version = "1.2.1" }
