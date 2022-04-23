@@ -3,10 +3,5 @@ pub mod browser_list;
 
 mod wblist;
 
-pub fn from_fs_search() -> Vec<browser::Browser> {
-    wblist::from_fs_search()
-}
-
-pub fn from_reg() -> Vec<browser::Browser> {
-    wblist::from_reg()
-}
+pub use wblist::from_fs_search;
+pub use wblist::from_reg;
