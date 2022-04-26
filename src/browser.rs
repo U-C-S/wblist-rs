@@ -1,6 +1,6 @@
 use serde::Deserialize;
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Default)]
 pub struct Browser {
     pub full_name: String,
     pub short_name: Option<String>,
@@ -15,16 +15,19 @@ pub struct Browser {
     ///
     /// We just use the name of the foider
     pub icon: String,
+
+    pub data_dir: Option<String>,
 }
 
 impl Browser {
-    pub fn new(full_name: String, short_name: String, path: String) -> Self {
+    pub fn new(full_name: String, path: String) -> Self {
         Self {
             full_name,
             path,
             btype: BrowserType::Unknown,
             short_name: Some(short_name),
             icon: "".to_string(),
+            data_dir: None,
         }
     }
 }

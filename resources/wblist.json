@@ -1,27 +1,71 @@
 [
   {
+    "full_name": "Brave",
+    "short_name": "Brave",
+    "path": "C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe",
+    "btype": 0,
+    "icon": "brave",
+    "data-dir": "BraveSoftware\\Brave-Browser\\User Data"
+  },
+  {
     "full_name": "Google Chrome",
     "short_name": "Chrome",
-    "path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+    "path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "btype": 0,
+    "icon": "chrome",
+    "data-dir": "Google\\Chrome\\User Data"
+  },
+  {
+    "full_name": "Google Chrome Beta",
+    "short_name": "Chrome",
+    "path": "C:\\Program Files\\Google\\Chrome Beta\\Application\\chrome.exe",
+    "btype": 0,
+    "icon": "chrome-beta",
+    "data-dir": "Google\\Chrome Beta\\User Data"
+  },
+  {
+    "full_name": "Google Chrome Dev",
+    "short_name": "Chrome Dev",
+    "path": "C:\\Program Files\\Google\\Chrome Dev\\Application\\chrome.exe",
+    "btype": 0,
+    "icon": "chrome-dev",
+    "data-dir": "Google\\Chrome Dev\\User Data"
+  },
+  {
+    "full_name": "Google Chrome Canary",
+    "short_name": "Chrome Canary",
+    "path": "C:\\Program Files\\Google\\Chrome Canary\\Application\\chrome.exe",
+    "btype": 0,
+    "icon": "chrome-canary",
+    "data-dir": "Google\\Chrome Canary\\User Data"
   },
   {
     "full_name": "Mozilla Firefox",
     "short_name": "Firefox",
-    "path": "C:\\Program Files\\Mozilla Firefox\\firefox.exe"
+    "path": "C:\\Program Files\\Mozilla Firefox\\firefox.exe",
+    "btype": 1,
+    "icon": "firefox"
+  },
+  {
+    "full_name": "Firefox Nightly",
+    "short_name": "Firefox Nightly",
+    "path": "C:\\Program Files\\Firefox Nightly\\firefox.exe",
+    "btype": 1,
+    "icon": "firefox-nightly"
   },
   {
     "full_name": "Microsoft Edge",
     "short_name": "Edge",
-    "path": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
+    "path": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+    "btype": 0,
+    "icon": "edge",
+    "data-dir": "Microsoft\\Edge\\User Data"
   },
   {
     "full_name": "Opera",
     "short_name": "Opera",
-    "path": "C:\\Program Files\\Opera\\launcher.exe"
-  },
-  {
-    "full_name": "Brave",
-    "short_name": "Brave",
-    "path": "C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe"
+    "path": "C:\\Program Files\\Opera\\launcher.exe",
+    "btype": 0,
+    "icon": "opera"
   }
 ]
