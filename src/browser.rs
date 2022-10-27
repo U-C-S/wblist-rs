@@ -9,7 +9,7 @@ pub struct Browser {
     pub path: String,
 
     /// Type of Browser
-    pub btype: BrowserType,
+    // pub btype: BrowserType,
 
     /// Icons from https://github.com/alrra/browser-logos/tree/main/src
     ///
@@ -20,22 +20,24 @@ pub struct Browser {
 }
 
 impl Browser {
-    pub fn new(full_name: String, path: String) -> Self {
+    pub fn new(full_name: String, path: String, short_name: Option<String>) -> Self {
         Self {
             full_name,
             path,
-            btype: BrowserType::Unknown,
-            short_name: Some(short_name),
+            // btype: BrowserType::Unknown,
+            short_name,
             icon: "".to_string(),
             data_dir: None,
         }
     }
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Default)]
 pub enum BrowserType {
     Chromium,
     Firefox,
+
+    #[default]
     Unknown,
 }
 

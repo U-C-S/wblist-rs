@@ -51,7 +51,7 @@ pub fn from_reg() -> Vec<Browser> {
 
         if let Ok(path) = pathkey {
             let path = path.value("").unwrap();
-            let b = Browser::new(name.to_string(), "".to_string(), path.to_string());
+            let b = Browser::new(name.to_string(), path.to_string(), None);
             list.push(b);
         }
     }
